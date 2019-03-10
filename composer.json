@@ -1,5 +1,5 @@
 {
-  "name": "kimai/composer-plugin-installer",
+  "name": "kimai/kimai2-composer",
   "type": "composer-plugin",
   "license": "MIT",
   "description": "An installer for Kimai 2 plugins",
