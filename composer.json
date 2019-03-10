@@ -9,7 +9,7 @@
     "time-tracking",
     "time-tracker"
   ],
-  "homepage": "https://github.com/kimai/composer-plugin-installer",
+  "homepage": "https://github.com/kimai/kimai2-composer",
   "authors": [
     {
       "name": "Kevin Papst",
@@ -30,7 +30,7 @@
   },
   "require-dev": {
     "friendsofphp/php-cs-fixer": "^2.10",
-    "composer/composer": "^1.0@dev",
-    "composer/semver": "^1.0@dev"
+    "composer/composer": "^1.0",
+    "composer/semver": "^1.0"
   }
 }

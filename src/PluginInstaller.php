@@ -15,35 +15,31 @@ use Composer\Package\PackageInterface;
 class PluginInstaller extends LibraryInstaller
 {
     /**
-     * @var PackageInterface[]
-     */
-    protected $packages= [];
-
-    /**
      * {@inheritdoc}
      */
     public function getInstallPath(PackageInterface $package)
     {
         $packageName = $package->getName();
-        $postfix = substr($packageName, -7);
 
-        if ($postfix !== '-bundle') {
-            throw new \InvalidArgumentException(
-                sprintf('Unable to install Kimai plugin, package name "%s" must end with "-bundle"', $packageName)
-            );
+        $dirname = substr($package->getPrettyName(), strrpos($package->getPrettyName(), '/') + 1);
+
+        $extra = $package->getExtra();
+        if (isset($extra['kimai']) && isset($extra['kimai']['name'])) {
+            $dirname = $extra['kimai']['name'];
         }
 
-        $this->packages[] = $package;
+        $postfix = substr($dirname, -6);
+        if ($postfix !== 'Bundle') {
+            $this->io->writeError(
+                sprintf('Unable to install Kimai plugin, package name "%s" must either end with "Bundle" or you provide a name via composer "extra.kimai.name" config', $packageName)
+            );
 
-        return parent::getInstallPath($package);
-    }
+            return parent::getInstallPath($package);
+        }
 
-    /**
-     * @return PackageInterface[]
-     */
-    public function getInstalledPackages()
-    {
-        return $this->packages;
+        $rootDir = dirname($this->composer->getConfig()->get('vendor-dir'));
+
+        return $rootDir . '/var/plugins/' . $dirname . '/';
     }
 
     /**
@@ -52,9 +48,7 @@ class PluginInstaller extends LibraryInstaller
     public function supports($packageType)
     {
         $allowedTypes = [
-            'kimai2-plugin',
             'kimai-plugin',
-            'kimai-bundle',
         ];
 
         return in_array($packageType, $allowedTypes);
