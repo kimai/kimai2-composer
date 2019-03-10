@@ -1,0 +1,35 @@
+{
+  "name": "kimai/composer-plugin-installer",
+  "type": "composer-plugin",
+  "license": "MIT",
+  "description": "An installer for Kimai 2 plugins",
+  "keywords": [
+    "installer",
+    "Kimai",
+    "Kimai 2",
+    "Time-tracking",
+    "Time-tracker"
+  ],
+  "homepage": "https://github.com/kimai/composer-plugin-installer",
+  "authors": [
+    {
+      "name": "Kevin Papst",
+      "email": "kpapst@gmx.net",
+      "homepage": "https://github.com/kevinpapst"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Kimai2\\Composer\\": "src/"
+    }
+  },
+  "extra": {
+    "class": "Kimai2\\Composer\\Plugin"
+  },
+  "require": {
+    "composer-plugin-api": "^1.0"
+  },
+  "require-dev": {
+    "friendsofphp/php-cs-fixer": "^2.10"
+  }
+}
