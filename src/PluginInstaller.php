@@ -15,27 +15,35 @@ use Composer\Package\PackageInterface;
 class PluginInstaller extends LibraryInstaller
 {
     /**
+     * @var PackageInterface[]
+     */
+    protected $packages= [];
+
+    /**
      * {@inheritdoc}
      */
     public function getInstallPath(PackageInterface $package)
     {
-        $postfix = substr($package->getPrettyName(), -6);
+        $packageName = $package->getName();
+        $postfix = substr($packageName, -7);
 
-        if ($postfix !== 'Bundle') {
+        if ($postfix !== '-bundle') {
             throw new \InvalidArgumentException(
-                'Unable to install plugin, names for Kimai 2 plugins always need to end with: "Bundle"'
+                sprintf('Unable to install Kimai plugin, package name "%s" must end with "-bundle"', $packageName)
             );
         }
 
-        /*
-        if (file_exists('......')) {
-            throw new \InvalidArgumentException(
-                'Unable to install plugin, already existing...'
-            );
-        }
-        */
+        $this->packages[] = $package;
 
-        return 'var/plugins/' . substr($package->getPrettyName(), 23);
+        return parent::getInstallPath($package);
+    }
+
+    /**
+     * @return PackageInterface[]
+     */
+    public function getInstalledPackages()
+    {
+        return $this->packages;
     }
 
     /**

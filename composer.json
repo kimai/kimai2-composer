@@ -5,10 +5,9 @@
   "description": "An installer for Kimai 2 plugins",
   "keywords": [
     "installer",
-    "Kimai",
-    "Kimai 2",
-    "Time-tracking",
-    "Time-tracker"
+    "kimai",
+    "time-tracking",
+    "time-tracker"
   ],
   "homepage": "https://github.com/kimai/composer-plugin-installer",
   "authors": [
@@ -30,6 +29,8 @@
     "composer-plugin-api": "^1.0"
   },
   "require-dev": {
-    "friendsofphp/php-cs-fixer": "^2.10"
+    "friendsofphp/php-cs-fixer": "^2.10",
+    "composer/composer": "^1.0@dev",
+    "composer/semver": "^1.0@dev"
   }
 }
